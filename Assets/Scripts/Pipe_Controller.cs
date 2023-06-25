@@ -9,10 +9,14 @@ public class Pipe_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Update()
     {
-        this.transform.position += Vector3.left * velocity * Time.deltaTime;
-            if (this.transform.position.x < leftLimit)
-            {
+        if (Menu_Control.intance.gameStarted)
+        {
+            this.transform.position += Vector3.left * velocity * Time.deltaTime;
+                if (this.transform.position.x < leftLimit)
+                {
                 Destroy(this.gameObject);
-            }
+                }
+        }
+        
     }
 }

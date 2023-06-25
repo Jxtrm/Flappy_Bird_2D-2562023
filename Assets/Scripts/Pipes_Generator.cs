@@ -5,12 +5,23 @@ using UnityEngine;
 public class Pipes_Generator : MonoBehaviour
 {
     [SerializeField] private GameObject pipes;
+    [SerializeField] private float interval = 3f;
     private float minHeigth = -2.5f;
     private float maxHeigth = 1.5f;
-    [SerializeField] private float interval = 3f;
-    void Start()
+    private float startPipes = 2f;
+    private bool pipesGeneratorStopped = true;
+    
+    void Update()
     {
-        InvokeRepeating("PipeCreator", 0, interval);
+        if(Menu_Control.intance.gameStarted && pipesGeneratorStopped)
+        {
+            pipesGeneratorStopped = false;
+            InvokeRepeating("PipeCreator", startPipes, interval);
+        }
+        if (!Menu_Control.intance.gameStarted && !pipesGeneratorStopped)
+        {
+            CancelInvoke();
+        }
     }
 
     private void PipeCreator()
